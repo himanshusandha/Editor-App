@@ -28,7 +28,7 @@
   <body>
     <div id="listing">
       <ol tabindex="-1" id="myOl" onkeyup="keypressed(event)" onclick="selectrow(event)" onkeydown="colorback(event)"contenteditable="true">
-        <li>//start typing here..</li>
+        <li></li>
       </ol>
     </div>
     <input type="button" onclick="data()" value="click"></button>
@@ -50,6 +50,7 @@
       if(x==8 && document.getElementById("myOl").childElementCount==0){
         var y = document.createElement("LI");
         document.getElementById("myOl").appendChild(y);
+        row_num=0;
       }
       if(x==13){ //enter
         row_num++;
@@ -69,6 +70,9 @@
         if(row_num!=(--document.getElementById("myOl").childElementCount)){
           row_num++;
         }
+      }
+      if(x==8  && document.getElementById("myOl").children[row_num].textContent==""){//backspace
+        row_num--;
       }
       coloringback();
     }
@@ -92,7 +96,7 @@
       var c = document.getElementById("myOl").children;
       for (i = 0; i < n; i++) {
           c[i].style.backgroundColor ="";
-      }
+        }
       event.target.style.backgroundColor = "green";
         for (i = 0; i < n; i++) {
             if(c[i].style.backgroundColor =="green"){
