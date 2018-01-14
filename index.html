@@ -27,7 +27,7 @@
   </head>
   <body>
     <div id="listing">
-      <ol tabindex="-1" id="myOl" onkeyup="keypressed(event)" onclick="selectrow(event)" onkeydown="colorback(event)"contenteditable="true">
+      <ol id="myOl" onkeyup="keypressed(event)" onclick="selectrow(event)" onkeydown="colorback(event)"contenteditable="true">
         <li></li>
       </ol>
     </div>
@@ -55,7 +55,6 @@
       if(x==13){ //enter
         row_num++;
       }
-      coloringback();
     }
     function colorback(event) {
       /*used event.which because event.keyCode does not work on firefox*/
@@ -71,12 +70,21 @@
           row_num++;
         }
       }
-      if(x==8  && document.getElementById("myOl").children[row_num].textContent==""){//backspace
-        row_num--;
+      if(x==8){//backspace
+        var prev=document.getElementById('myOl').children[row_num-1].textContent.length;
+        var curr=document.getElementById('myOl').children[row_num].textContent.length;
+        setTimeout(myTimer_backspace, 10,prev,curr);
       }
-      coloringback();
     }
-    function coloringback() {
+
+    function myTimer_backspace(prev,curr) {
+        if(row_num==0){}
+        else if(document.getElementById('myOl').children[row_num-1].textContent.length==(prev+curr)){
+          row_num--;
+        }
+    }
+
+    setInterval(function coloringback() {
       var n=document.getElementById("myOl").childElementCount;
       var c = document.getElementById("myOl").children;
       for (i = 0; i < n; i++) {
@@ -87,7 +95,7 @@
             c[i].style.backgroundColor = "";
           }
       }
-    }
+    },10);
 
     var row_num=0;
     function selectrow(event){
