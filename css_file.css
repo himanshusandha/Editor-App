@@ -1,0 +1,19 @@
+  *{
+    margin: 0px;
+    padding: 0px;
+  }
+  #listing{
+    padding-left: 30px;
+    padding-top: 30px;
+    background-color: #333;
+    width: 97vw;
+    min-height: 95vh;
+  }
+  #myOl:focus{
+    outline: none;
+    caret-color: red; /*pointer color*/
+  }
+  #listing>ol>li{
+    text-indent: 20px;
+    font-size: 24px;
+  }
