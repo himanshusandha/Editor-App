@@ -2,37 +2,18 @@
 <html>
   <head>
     <title>Editor App</title>
-    <meta name="viewport" content="width=device-width initial-scale=1">
-    <style type="text/css">
-      *{
-        margin: 0px;
-        padding: 0px;
-      }
-      #listing{
-        padding-left: 30px;
-        padding-top: 30px;
-        background-color: #333;
-        width: 97vw;
-        min-height: 95vh;
-      }
-      #myOl:focus{
-        outline: none;
-        caret-color: red; /*pointer color*/
-      }
-      #listing>ol>li{
-        text-indent: 20px;
-        font-size: 24px;
-      }
-    </style>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css_file.css">
   </head>
   <body>
     <div id="listing">
-      <ol id="myOl" onkeyup="keypressed(event)" onclick="selectrow(event)" onkeydown="colorback(event)"contenteditable="true">
+      <ol id="myOl" onkeyup="myOl_keyup(event)" onclick="myOl_click_selectrow(event)" onkeydown="myOl_keydown(event)" contenteditable="true">
         <li></li>
       </ol>
     </div>
     <input type="button" onclick="data()" value="click"></button>
   </body>
+
   <script>
   function data() {
     var str=" ";
@@ -43,75 +24,10 @@
       }
       alert(str);
     }
-
-    function keypressed(event) {
-      /*used event.which because event.keyCode does not work on firefox*/
-      var x = event.which || event.keyCode;
-      if(x==8 && document.getElementById("myOl").childElementCount==0){
-        var y = document.createElement("LI");
-        document.getElementById("myOl").appendChild(y);
-        row_num=0;
-      }
-      if(x==13){ //enter
-        row_num++;
-      }
-    }
-    function colorback(event) {
-      /*used event.which because event.keyCode does not work on firefox*/
-      var x = event.which || event.keyCode;
-      //eneter in keypressed method as keydown doesn't recognize enter
-      if(x==38){ //up
-        if(row_num!=0){
-          row_num--;
-        }
-      }
-      if(x==40){ //down
-        if(row_num!=(--document.getElementById("myOl").childElementCount)){
-          row_num++;
-        }
-      }
-      if(x==8){//backspace
-        var prev=document.getElementById('myOl').children[row_num-1].textContent.length;
-        var curr=document.getElementById('myOl').children[row_num].textContent.length;
-        setTimeout(myTimer_backspace, 10,prev,curr);
-      }
-    }
-
-    function myTimer_backspace(prev,curr) {
-        if(row_num==0){}
-        else if(document.getElementById('myOl').children[row_num-1].textContent.length==(prev+curr)){
-          row_num--;
-        }
-    }
-
-    setInterval(function coloringback() {
-      var n=document.getElementById("myOl").childElementCount;
-      var c = document.getElementById("myOl").children;
-      for (i = 0; i < n; i++) {
-          if(i==row_num){
-            c[i].style.backgroundColor ="green";
-          }
-          else{
-            c[i].style.backgroundColor = "";
-          }
-      }
-    },10);
-
-    var row_num=0;
-    function selectrow(event){
-      //for color portion on active element
-      var n=document.getElementById("myOl").childElementCount;
-      var c = document.getElementById("myOl").children;
-      for (i = 0; i < n; i++) {
-          c[i].style.backgroundColor ="";
-        }
-      event.target.style.backgroundColor = "green";
-        for (i = 0; i < n; i++) {
-            if(c[i].style.backgroundColor =="green"){
-              row_num=i;
-            }
-        }
-      }
-
   </script>
+  <script src="setInterval_coloring_active.js"></script>
+  <script src="myOl_click_selectrow.js"></script>
+  <script src="myOl_keydown.js"></script>
+  <script src="myOl_keyup.js"></script>
+
 </html>
