@@ -11,18 +11,61 @@
         <li></li>
       </ol>
     </div>
-    <input type="button" onclick="data()" value="click"></button>
+    <br><br>
+    <input type="file" id="fileLoader" />
+    <input type="button" id="Save" value="Save File" onclick="saveFile()" />
   </body>
 
   <script>
+  document.getElementById("fileLoader").onchange=function(){
+    var file=document.getElementById("fileLoader").files[0];
+    var fileReader=new FileReader();
+    fileReader.onload=function(e){
+    var getText=e.target.result;
+    showdata(getText);
+    }
+    fileReader.readAsBinaryString(file,"UTF-8");
+  };
+
+  function showdata(getText) {
+    var stri=getText.split("\n");
+    for (i = 0; i < stri.length; i++) {
+      var y =document.createElement("LI");
+      y.textContent=stri[i];
+      document.getElementById("myOl").appendChild(y);
+      row_num++;
+    }
+  }
+
+  function saveFile(){
+	  data();
+    var textBLOB=new Blob([saveText],{type:"text/plain"});
+    var fileName="new 0";
+    var link=document.createElement("a");
+    link.download=fileName;
+    link.innerHTML="Download File";
+    if(window.URL!=null){
+      link.href=window.URL.createObjectURL(textBLOB);
+    }else{
+      link.href=window.URL.createObjectURL(textBLOB);
+      link.onclick=destroy;
+      link.style.display="none";
+      document.body.appendChild(link);
+    }
+    link.click();
+    saveText="";
+  }
+  function destroy(e){
+    document.body.removeChild(e.target);
+  }
+
+  var saveText=" ";
   function data() {
-    var str=" ";
     var n=document.getElementById("myOl").childElementCount; /*length start with 1*/
     var c = document.getElementById("myOl").children;
     for (i = 0; i < n; i++) {
-        str=str + c[i].textContent + "\n";
+        saveText=saveText + c[i].textContent + "\n";
       }
-      alert(str);
     }
   </script>
   <script src="setInterval_coloring_active.js"></script>
