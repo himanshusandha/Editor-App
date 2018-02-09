@@ -1,0 +1,76 @@
+  *{
+    margin: 0px;
+    padding: 0px;
+  }
+  #listing{
+    padding-left: 30px;
+    padding-top: 30px;
+    background-color:#404552;
+    width: 97.8vw;
+    min-height: 80vh;
+  }
+  #myOl:focus{
+    outline: none;
+    caret-color: red; /*pointer color*/
+  }
+  #listing>ol>li{
+    //white-space: nowrap;
+    font-size: 24px;
+    text-indent: 40px;
+    color : white;
+  }
+
+  /*#dotlist{
+    list-style-type: none;
+    margin-top:  -656px;
+    margin-left: 17px;
+    position: absolute;
+  }
+  #dotlist>li::before{
+    font-size: 24px;
+    color : #404552;
+    content: "I";
+  }*/
+
+  /*#myOl{
+    counter-reset: libeforecount;
+    list-style-type: none;
+  }
+  #listing>ol>li::before {
+    counter-increment: libeforecount;
+    content: counter(libeforecount) "\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0";
+  }
+  #listing>ol>li:nth-child(-n+99999){
+    padding-left: 0vw;
+  }
+  #listing>ol>li:nth-child(-n+9999){
+    padding-left: 1vw;
+  }
+  #listing>ol>li:nth-child(-n+999){
+    padding-left: 2vw;
+  }
+  #listing>ol>li:nth-child(-n+99){
+    padding-left: 3vw;
+  }
+  #listing>ol>li:nth-child(-n+9){
+    padding-left: 4vw;
+  }*/
+  li::selection {
+    color: gold;
+    background: red;
+  }
+
+  #spanedit{
+    margin-top: -567px;
+    float:right;
+    color : white;
+    text-align: center;
+    border-radius: 25%;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  #spanedit:hover{
+    background-color: red;
+    color : black;
+    transition: all 0.50s;
+  }
