@@ -1,0 +1,75 @@
+overflow
+	visible 	Allows the content to overflow the borders of its containing element.
+	hidden 		The content of the nested element is simply cut off at the border of the containing element and no scrollbars is visible.
+	scroll 		The size of the containing element does not change, but the scrollbars are added to allow the user to scroll to see the content.
+	auto 		The purpose is the same as scroll, but the scrollbar will be shown only if the content does overflow.
+
+visibility
+	visible 	The box and its contents are shown to the user.
+	hidden 		The box and its content are made invisible, although they still affect the layout of the page.
+	collapse 	This is for use only with dynamic table columns and row effects
+
+position
+	relative   changes the position of the HTML element relative to where it normally appears.
+	absolute   positioned at the specified coordinates relative to your screen top-left corner.
+	fixed      Fixed positioning allows you to fix the position of an element to a particular spot on the page, regardless of scrolling.
+			   Specified coordinates will be relative to the browser window.
+	left:(-ve for left)(+ve for right)
+	top:(-ve for up)(+ve for down)
+
+layering
+eg. z-index:2
+
+pseudo class
+	selector:pseudo-class {property: value}
+		:link Use this class to add special style to an unvisited link.
+		:visited Use this class to add special style to a visited link.
+		:hover Use this class to add special style to an element when you mouse over it.
+		:active Use this class to add special style to an active element.
+		:focus Use this class to add special style to an element while the element has focus.
+		:firstchild  Use this class to add special style to an element that is the first child of some other element.
+		:lang Use this class to specify a language to use in a specified element.
+e.g a:link {color:#000000}
+
+pseudo element
+	selector:pseudo-element {property: value}
+		:first-line Use this element to add special styles to the first line of the text in a selector.
+		:first-letter Use this element to add special style to the first letter of the text in a selector.
+		:before Use this element to insert some content before an element.
+		:after Use this element to insert some content after an element.
+	e.g p:before{content: url(/images/bullet.gif)}
+
+*****page 130******
+
+
+
+<script type="text/javascript">
+    function lang1(event) {
+        /*var target = event.target || event.srcElement;
+        alert(event.target.innerHTML);
+    }*/
+    var elementsLI = document.getElementsByTagName('li')
+	var length = document.getElementsByTagName('li').length;
+	for(var i = 0; i <= length ; ++i){
+	alert(elementsLI[i].value);
+	}
+    }
+</script>
+
+<form>
+    <ul id="language" onclick="lang1(event);">
+        <li>PHP</li>
+        <li>ASP</li>
+        <li>JAVA</li>
+        <li>CQ5</li>
+    </ul>
+</form>
+
+
+
+<textarea autocomplete="off" id="textareaCode" wrap="logical" spellcheck="false">
+
+
+cursor:pointer
+
+document.getElementById(id).style.property = new style

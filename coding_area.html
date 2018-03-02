@@ -1,0 +1,71 @@
+<!Doctype html>
+<html>
+  <head>
+    <title>Editor App</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css_coding_area.css">
+  </head>
+  <body>
+    <div id="listing">
+      <ol id="myOl" onkeyup="myOl_keyup(event)" onclick="myOl_click_selectrow(event)" onkeydown="myOl_keydown(event)" contenteditable="true">
+        <li></li>
+      </ol>
+    </div>
+
+      <!--<ol id="dotlist">
+        <li></li>
+      </ol>!-->
+
+    <span onclick="editable()" id="spanedit">unedit</span>
+    <input type="button" id="Save" value="Save File" onclick="saveFile()" />
+  </body>
+
+  <script>
+  /*setInterval(function dotlistincre() {
+    var myOl_count=document.getElementById("myOl").childElementCount;
+    var dotlist_count=document.getElementById("dotlist").childElementCount;
+    for (i = 1; i <=(myOl_count - dotlist_count); i++) {
+      var y = document.createElement("LI");
+      document.getElementById("dotlist").appendChild(y);
+        }
+  },10);*/
+
+  function saveFile(){
+	  data();
+    var textBLOB=new Blob([saveText],{type:"text/plain"});
+    var fileName="new 0";
+    var link=document.createElement("a");
+    link.download=fileName;
+    link.innerHTML="Download File";
+    if(window.URL!=null){
+      link.href=window.URL.createObjectURL(textBLOB);
+    }else{
+      link.href=window.URL.createObjectURL(textBLOB);
+      link.onclick=destroy;
+      link.style.display="none";
+      document.body.appendChild(link);
+    }
+    link.click();
+    saveText="";
+  }
+  function destroy(e){
+    document.body.removeChild(e.target);
+  }
+
+  var saveText=" ";
+  function data() {
+    var n=document.getElementById("myOl").childElementCount; /*length start with 1*/
+    var c = document.getElementById("myOl").children;
+    for (i = 0; i < n; i++) {
+        saveText=saveText + c[i].textContent + "\n";
+      }
+    }
+  </script>
+  <script src="setInterval_coloring_active.js"></script>
+  <script src="myOl_click_selectrow.js"></script>
+  <script src="myOl_keydown.js"></script>
+  <script src="myOl_keyup.js"></script>
+  <script src="coding_edit_unedit.js"></script>
+  <script src="js_showdata.js"></script>
+
+</html>

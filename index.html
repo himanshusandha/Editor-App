@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css_index.css">
+</head>
+<body>
+<div id="btn_grp">
+  <button class="tablink" onclick="openPage('Frameeg1', this)" onmouseover="closebtndis(this)" onmouseout="closebtnin(this)">new 0.txt
+    <span onclick="closePage('Frameeg1',this)" class="closebtn">X</span>
+  </button>
+  <button class="tablink" onclick="openPage('Frameeg2', this)" onmouseover="closebtndis(this)" onmouseout="closebtnin(this)">index.html
+    <span onclick="closePage('Frameeg2',this)" class="closebtn">X</span>
+  </button>
+  <button class="tablink" onclick="openPage('Frameeg3', this)" onmouseover="closebtndis(this)" onmouseout="closebtnin(this)">new 1.txt
+    <span onclick="closePage('Frameeg3',this)" class="closebtn">X</span>
+  </button>
+  <button class="tablink" onclick="openPage('Frameeg4', this)" onmouseover="closebtndis(this)" onmouseout="closebtnin(this)">index 1.html
+    <span onclick="closePage('Frameeg4',this)" class="closebtn">X</span>
+  </button>
+</div>
+
+<div id="frm_grp">
+  <div id="Frameeg1" class="tabcontent">
+    <iframe src="coding_area.html"></iframe>
+  </div>
+  <div id="Frameeg2" class="tabcontent">
+    <iframe src="coding_area.html"></iframe>
+  </div>
+  <div id="Frameeg3" class="tabcontent">
+    <iframe src="coding_area.html"></iframe>
+  </div>
+  <div id="Frameeg4" class="tabcontent">
+    <iframe src="coding_area.html"></iframe>
+  </div>
+</div>
+
+<!--<div class="footer">
+
+    <div>name file</div>
+    <div>total lines:lengthofchars</div>
+    <div>current line:column name</div>
+    <div>encoding</div>
+    <div>Fileformat</div>
+</div>-->
+
+<script src="close.js"></script>
+<script src="open.js"></script>
+<script src="general_script_index.js"></script>
+<script>
+const {ipcRenderer}=require('electron');
+
+//newFile
+ipcRenderer.on('newFile', function(event,args){
+  //selection of frame name
+  let frm_grp_content=document.getElementById('frm_grp').children;
+  let frm_grp_id=[];
+  let frm_set_name='Frameeg'+(frm_grp_content.length+1);
+  for (i = 0; i < frm_grp_content.length; i++) {
+    frm_grp_id[i]=frm_grp_content[i].getAttribute('id');
+  }
+  frm_grp_id.sort();
+  for(i=0;i<frm_grp_content.length;i++){
+    if(frm_grp_id[i]!='Frameeg'+(i+1)){
+      frm_set_name='Frameeg'+(i+1);
+      break;
+    }
+  }
+
+  //creation of new file
+  let btn = document.createElement("button");
+  btn.setAttribute("class","tablink");
+  btn.setAttribute("onclick","openPage('"+frm_set_name+"', this)");
+  btn.setAttribute("onmouseover","closebtndis(this)");
+  btn.setAttribute("onmouseout","closebtnin(this)");
+  btn.innerHTML= args;
+
+  let sp=document.createElement("span");
+  sp.setAttribute("onclick","closePage('"+frm_set_name+"',this)");
+  sp.setAttribute("class","closebtn");
+  sp.innerHTML="X";
+
+  btn.appendChild(sp);
+  document.getElementById("btn_grp").appendChild(btn);
+
+  let div_frm=document.createElement("div");
+  div_frm.setAttribute("id",frm_set_name);
+  div_frm.setAttribute("class","tabcontent");
+
+  let ifrm=document.createElement("iframe");
+  ifrm.setAttribute("src","coding_area.html");
+
+  div_frm.appendChild(ifrm);
+  document.getElementById('frm_grp').appendChild(div_frm);
+
+  btn.click();
+});
+
+//openFile
+  ipcRenderer.on('openFile', function(event,args){
+    selectCurrentTab();
+    setTimeout(function waittoget() {
+      yx.showdata(args);
+    }, 100);
+  });
+
+//saveFile
+  ipcRenderer.on('saveFile', function(event,args){
+    selectCurrentTab();
+    yx.getElementById("Save").click();
+  });
+
+  var yx;
+  function selectCurrentTab(){
+    let tabcontent=document.getElementsByClassName("tabcontent");
+    let currentArea;
+    for(i=0;i<tabcontent.length;i++){
+      if(tabcontent[i].style.display=="block"){
+        currentArea=tabcontent[i].getAttribute('id');//frameeg+(i+1)
+        break;
+      }
+    }
+    let ifrm=document.getElementById(currentArea).children[0];
+    yx=ifrm.contentWindow;
+  }
+</script>
+
+</body>
+</html>

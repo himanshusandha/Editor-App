@@ -1,0 +1,11 @@
+{
+  "name": "editorapp",
+  "version": "1.0.0",
+  "description": "A Cross Platform Editor App",
+  "main": "index.js",
+  "scripts": {
+  	"start" : "electron ."
+	},
+  "author" : "Himanshu",
+  "license": "ISC"
+}
