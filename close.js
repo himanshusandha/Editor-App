@@ -6,7 +6,7 @@ function closebtnin(elmnt){
 }
 function closePage(pageName,elmnt){
   tablinks=document.getElementsByClassName("tablink");
-  var current=0;
+  let current=0;
   for(i=0; i < tablinks.length; i++){
     if(elmnt.parentElement == tablinks[i]){
       current=i+1;

@@ -52,20 +52,32 @@ const mainMenuTemplate=[
 					},
 					{
 						label : 'Normal Text Area',
+						click(){
+							const testFolder = './';
+							fs.readdirSync(testFolder).forEach(file => {
+								console.log(file);
+								if((file.split('.')).length == 1){
+									fs.readdirSync(file).forEach(file1 => {
+										console.log(file1);
+									});
+								}
+							});
+						}
 					},
 				]
 			},
 			{
 				label : 'Open File',
+				accelerator : 'ctrl+o',
 				click(){
 					dialog.showOpenDialog((fileNames) => {
 						if(fileNames === undefined){
-							dialog.showErrorBox('ops..','No Files were selected');
+							dialog.showErrorBox('File Open Error','No Files were selected');
 							return;
 						}
 						fs.readFile(fileNames[0],"utf-8",(err,data) => {
 							if(err){
-								dialog.showErrorBox('ops..',err);
+								dialog.showErrorBox('File Open Error',err.message);
 								return;
 							}
 							mainWindow.webContents.send('newFile',fileNames[0]);
@@ -76,14 +88,35 @@ const mainMenuTemplate=[
 			},
 			{
 				label : 'Save',
+				accelerator : 'ctrl+s',
 				click(){
-					 mainWindow.webContents.send('saveFile', '');
+					mainWindow.webContents.send('isFileSaved');
 				}
 			},
 			{
 				label : 'Save As',
+				accelerator : 'ctrl+shift+s',
 				click(){
-					 mainWindow.webContents.send('saveFile', '');
+					dialog.showSaveDialog((fileNames) => {
+						if(fileNames === undefined){
+							dialog.showErrorBox('File Save Error','File Name not defined.');
+							return;
+						}
+						mainWindow.webContents.send('saveFile', fileNames);
+						let saveText;
+						ipcMain.on('saveData',(event, arg) => {
+							saveText=arg;
+						});
+						setTimeout(() => {
+							fs.writeFile(fileNames,saveText,(err) => {
+								if(err){
+									dialog.showErrorBox('File Save Error',err.message);
+									return;
+								}
+								dialog.showMessageBox({message:"File Successfully Saved !",buttons:["OK"]});
+							});
+						}, 300);
+					});
 				}
 			},
 			{
@@ -146,7 +179,8 @@ const mainMenuTemplate=[
 		submenu: [
 		  {
 			label: 'Learn More',
-			click () {electron.shell.openExternal('www.techworkweb.wordpress.com')}
+			accelerator : 'ctrl+H',
+			click () {electron.shell.openExternal('www.himanshusandha.wordpress.com')}
 		  }
 		]
 	}

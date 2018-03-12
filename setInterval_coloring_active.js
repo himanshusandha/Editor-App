@@ -1,5 +1,6 @@
+var back_high_color="rgba(255, 0, 225, 0.1)";
 setInterval(function coloring_active() {
-  var c = document.getElementById("myOl").children;
+  let c = document.getElementById("myOl").children;
   document.getElementById("myOl").style.backgroundColor = ""; //to set whole ol color to overcome bug when selected multi li's
   for (i = 0; i < c.length; i++) {
     c[i].style.backgroundColor = "";
@@ -9,5 +10,5 @@ setInterval(function coloring_active() {
   if(c.length==1){
     row_num=0;
   }
-  c[row_num].style.backgroundColor = "green"; //5294e2
-},10);
+  c[row_num].style.backgroundColor = back_high_color;
+},50);

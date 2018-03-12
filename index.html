@@ -73,7 +73,14 @@ ipcRenderer.on('newFile', function(event,args){
   btn.setAttribute("onclick","openPage('"+frm_set_name+"', this)");
   btn.setAttribute("onmouseover","closebtndis(this)");
   btn.setAttribute("onmouseout","closebtnin(this)");
-  btn.innerHTML= args;
+
+  let name_split=args.split("\\");
+  if(name_split.length==1){
+    btn.innerHTML="untitled." +args;
+  }
+  else{
+    btn.innerHTML= name_split[(name_split.length)-1];
+  }
 
   let sp=document.createElement("span");
   sp.setAttribute("onclick","closePage('"+frm_set_name+"',this)");
@@ -99,18 +106,26 @@ ipcRenderer.on('newFile', function(event,args){
 //openFile
   ipcRenderer.on('openFile', function(event,args){
     selectCurrentTab();
-    setTimeout(function waittoget() {
-      yx.showdata(args);
+    setTimeout(() => {
+      ifrm_contentWindow.showData(args);
     }, 100);
   });
 
 //saveFile
   ipcRenderer.on('saveFile', function(event,args){
     selectCurrentTab();
-    yx.getElementById("Save").click();
+    let saveText=ifrm_contentWindow.getData(args);
+    ipcRenderer.send('saveData',saveText);
   });
 
-  var yx;
+//saveFileisalreadysaved
+  ipcRenderer.on('isFileSaved', function(event,args){
+    selectCurrentTab();
+    let bool_isFileSaved=ifrm_contentWindow.getFileName();
+    
+  });
+
+  var ifrm_contentWindow;
   function selectCurrentTab(){
     let tabcontent=document.getElementsByClassName("tabcontent");
     let currentArea;
@@ -121,7 +136,7 @@ ipcRenderer.on('newFile', function(event,args){
       }
     }
     let ifrm=document.getElementById(currentArea).children[0];
-    yx=ifrm.contentWindow;
+    ifrm_contentWindow=ifrm.contentWindow;
   }
 </script>
 

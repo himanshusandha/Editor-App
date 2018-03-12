@@ -5,7 +5,8 @@
     padding-left: 20px;
     padding-top: 30px;
     background-color:#404552;
-    min-height: 80vh;
+    height: 85vh;
+    overflow: auto;
   }
   #myOl:focus{
     outline: none;
@@ -13,7 +14,7 @@
   }
   #listing>ol>li{
     //white-space: nowrap;
-    font-size: 24px;
+    font-size: 18px;
     text-indent: 40px;
     color : white;
   }
@@ -72,4 +73,19 @@
     background-color: red;
     color : black;
     transition: all 0.50s;
+  }
+
+  ::-webkit-scrollbar{ /*size of scrollbar*/
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track{ /*designing of track*/
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb{ /*thumb design*/
+    background: red;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover{
+    background: #b30000;
   }

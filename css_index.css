@@ -9,12 +9,14 @@ body,html{
 .tablink {
     background-color: #555;
     color: white;
-    float: left;
-    border: none;
+    float: left; /*flow of tabs i.e starting from...*/
+    border-color: black;
     outline: none;
     cursor: pointer;
-    padding: 14px 16px;
+    padding: 10px;
     font-size: 14px;
+    overflow: hidden; /*same due to below comment*/
+    white-space: nowrap; /*to stop overflow of content in div*/
 }
 
 .tablink:hover {
@@ -42,7 +44,7 @@ iframe{
 }
 .closebtn{
   visibility: hidden;
-  float:right;
+  float: right;
   background-color: inherit;
   border-radius: 50%;
   font-size: 14px;
@@ -55,6 +57,7 @@ iframe{
   color : black;
   transition: all 0.50s;
 }
+
 .footer{
   position: fixed;
   left: 0;
