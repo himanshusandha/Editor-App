@@ -10,7 +10,6 @@ let mainWindow;
 app.on('ready',function(){
 	const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize;
 	mainWindow=new BrowserWindow({width, height}),
-
 	mainWindow.loadURL(url.format({
 	pathname:path.join(__dirname,'index.html'),
 	protocol:'file:',
@@ -54,15 +53,7 @@ const mainMenuTemplate=[
 					{
 						label : 'Normal Text Area',
 						click(){
-							const testFolder = './';
-							fs.readdirSync(testFolder).forEach(file => {
-								console.log(file);
-								if((file.split('.')).length == 1){
-									fs.readdirSync(file).forEach(file1 => {
-										console.log(file1);
-									});
-								}
-							});
+
 						}
 					},
 				]
@@ -88,10 +79,25 @@ const mainMenuTemplate=[
 				}
 			},
 			{
+				label : 'Open Folder',
+				accelerator : 'ctrl+shift+o',
+				click(){
+					let dirpath=dialog.showOpenDialog({properties: ['openDirectory']});
+					mainWindow.webContents.send('mainDir',dirpath);
+				}
+			},
+			{
 				label : 'Save',
 				accelerator : 'ctrl+s',
 				click(){
 					mainWindow.webContents.send('isFileSaved');
+					ipcMain.on('bool_val',(event, arg) => {
+						if (arg == undefined) {
+
+						} else {
+
+						}
+					});
 				}
 			},
 			{
@@ -203,3 +209,15 @@ if(process.platform=="darwin"){
 		]
 	}); //if its mac than add a empty menu item because in mac 1st menuitem is electron
 }
+
+ipcMain.on('readDirFunc',(event, arg) => {
+	let arr={},i=1;
+	arr[0]=fs.readdirSync(''+arg).length;
+	fs.readdirSync(''+arg).forEach(file => {
+		arr[i]= arg+'\\'+file;
+		arr[arr[0]+i]= fs.lstatSync(arg+'\\'+file).isDirectory();
+		i++;
+	});
+	arr[i+i-1] = arg;  //original path
+	mainWindow.webContents.send('appendUL', arr);
+});

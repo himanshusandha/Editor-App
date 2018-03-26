@@ -44,11 +44,64 @@
     <div>Fileformat</div>
 </div>-->
 
+<div id="dir_tree" style="margin-top:-700px;">
+  <ul id="mainDirectoryUL">
+    <li id="mainDirectoryLi">Name</li>
+  </ul>
+</div>
+
 <script src="close.js"></script>
 <script src="open.js"></script>
 <script src="general_script_index.js"></script>
 <script>
-const {ipcRenderer}=require('electron');
+const {ipcRenderer,ipcMain}=require('electron');
+
+//mainDir fun
+ipcRenderer.on('mainDir', function(event,args){
+  document.getElementById('mainDirectoryLi').setAttribute("data-path",args);
+  document.getElementById('mainDirectoryLi').setAttribute("data-is-dir","true");
+  document.getElementById('mainDirectoryLi').setAttribute("onclick","open_file_dir(event)");
+  let name_split = args.toString().split("\\"); //used .toString() to convert args to a string as it was giving TypeError
+  document.getElementById('mainDirectoryLi').textContent = name_split[(name_split.length)-1];
+  document.getElementById('mainDirectoryLi').click();
+});
+
+//appendUL fun
+ipcRenderer.on('appendUL', function(event,args){
+  let ulElement = document.createElement('UL');
+  for ( i = 1; i <= args[0]; i++) { //i=0 because at 0 index lentgh is stored
+    let liElement = document.createElement('LI');
+    liElement.setAttribute("data-path", args[i]);
+    liElement.setAttribute("data-is-dir", args[args[0]+i]);
+    liElement.setAttribute("onclick", "open_file_dir(event)");
+    let name_split = args[i].toString().split("\\"); //used .toString() to convert args to a string as it was giving TypeError
+    liElement.textContent = name_split[(name_split.length)-1];
+    ulElement.appendChild(liElement);
+  }
+  let li_element_list = document.getElementById('mainDirectoryUL').getElementsByTagName('li');
+  for (i = 0; i < li_element_list.length; i++) {
+    if (li_element_list[i].getAttribute('data-path') == args[args[0]+args[0]+1]) {
+      li_element_list[i].appendChild(ulElement);
+      break;
+    }
+  }
+});
+
+//open_file_dir
+function open_file_dir(event){
+  if(event.target.getAttribute("data-is-dir") == "true"){
+    if (event.target.childElementCount == 0) {
+      ipcRenderer.send('readDirFunc',event.target.getAttribute("data-path"));
+    }
+    else {
+      event.target.children[0].remove();
+    }
+  }
+  else{
+
+  }
+  event.stopPropagation();
+}
 
 //newFile
 ipcRenderer.on('newFile', function(event,args){
@@ -122,7 +175,7 @@ ipcRenderer.on('newFile', function(event,args){
   ipcRenderer.on('isFileSaved', function(event,args){
     selectCurrentTab();
     let bool_isFileSaved=ifrm_contentWindow.getFileName();
-
+    ipcRenderer.send('bool_val',bool_isFileSaved);
   });
 
   var ifrm_contentWindow;

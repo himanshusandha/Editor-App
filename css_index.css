@@ -70,3 +70,7 @@ iframe{
   float: left;
   list-style-type: none;
 }
+
+#mainDirectoryUL{
+  cursor: pointer;
+}
