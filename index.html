@@ -98,7 +98,7 @@ function open_file_dir(event){
     }
   }
   else{
-
+    ipcRenderer.send('openreadFileFromTree',event.target.getAttribute("data-path"));
   }
   event.stopPropagation();
 }

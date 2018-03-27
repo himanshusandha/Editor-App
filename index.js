@@ -67,14 +67,7 @@ const mainMenuTemplate=[
 							dialog.showErrorBox('File Open Error','No Files were selected');
 							return;
 						}
-						fs.readFile(fileNames[0],"utf-8",(err,data) => {
-							if(err){
-								dialog.showErrorBox('File Open Error',err.message);
-								return;
-							}
-							mainWindow.webContents.send('newFile',fileNames[0]);
-							mainWindow.webContents.send('openFile',data);
-						});
+						readTheFile(fileNames[0]);
 					});
 				}
 			},
@@ -221,3 +214,17 @@ ipcMain.on('readDirFunc',(event, arg) => {
 	arr[i+i-1] = arg;  //original path
 	mainWindow.webContents.send('appendUL', arr);
 });
+
+ipcMain.on('openreadFileFromTree',(event, arg) =>{
+	readTheFile(arg);
+});
+function readTheFile(filename){
+	fs.readFile(filename,"utf-8",(err,data) => {
+		if(err){
+			dialog.showErrorBox('File Open Error',err.message);
+			return;
+		}
+		mainWindow.webContents.send('newFile',filename);
+		mainWindow.webContents.send('openFile',data);
+	});
+}
