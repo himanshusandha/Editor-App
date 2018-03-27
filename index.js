@@ -84,39 +84,14 @@ const mainMenuTemplate=[
 				accelerator : 'ctrl+s',
 				click(){
 					mainWindow.webContents.send('isFileSaved');
-					ipcMain.on('bool_val',(event, arg) => {
-						if (arg == undefined) {
-
-						} else {
-
-						}
-					});
+					//bool_valipcMain would be executed
 				}
 			},
 			{
 				label : 'Save As',
 				accelerator : 'ctrl+shift+s',
 				click(){
-					dialog.showSaveDialog((fileNames) => {
-						if(fileNames === undefined){
-							dialog.showErrorBox('File Save Error','File Name not defined.');
-							return;
-						}
-						mainWindow.webContents.send('saveFile', fileNames);
-						let saveText;
-						ipcMain.on('saveData',(event, arg) => {
-							saveText=arg;
-						});
-						setTimeout(() => {
-							fs.writeFile(fileNames,saveText,(err) => {
-								if(err){
-									dialog.showErrorBox('File Save Error',err.message);
-									return;
-								}
-								dialog.showMessageBox({message:"File Successfully Saved !",buttons:["OK"]});
-							});
-						}, 300);
-					});
+					saveAsFunc();
 				}
 			},
 			{
@@ -202,6 +177,41 @@ if(process.platform=="darwin"){
 		]
 	}); //if its mac than add a empty menu item because in mac 1st menuitem is electron
 }
+
+ipcMain.on('bool_val',(event, arg) => {
+	if (arg == undefined) {
+		saveAsFunc();
+	} else {
+		saveFunc(arg);
+	}
+});
+
+function saveAsFunc() {
+	dialog.showSaveDialog((fileNames) => {
+		if(fileNames === undefined){
+			dialog.showErrorBox('File Save Error','File Name not defined.');
+			return;
+		}
+		saveFunc(fileNames);
+	});
+}
+function saveFunc(fileNames) {
+	mainWindow.webContents.send('saveFile', fileNames);
+	//ipcMain saveData would be executed
+	setTimeout(() => {
+		fs.writeFile(fileNames,saveText,(err) => {
+			if(err){
+				dialog.showErrorBox('File Save Error',err.message);
+				return;
+			}
+			dialog.showMessageBox({message:"File Successfully Saved !",buttons:["OK"]});
+		});
+	}, 300);
+}
+let saveText;
+ipcMain.on('saveData',(event, arg) => {
+	saveText=arg;
+});
 
 ipcMain.on('readDirFunc',(event, arg) => {
 	let arr={},i=1;
