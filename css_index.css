@@ -5,7 +5,7 @@ body,html{
     overflow :hidden;
 }
 
-/* Style tab links */
+/* Style tab (button)links */
 .tablink {
     background-color: #555;
     color: white;
@@ -26,7 +26,6 @@ body,html{
 .tabcontent {
     color: white;
     display: none;
-    padding: 100px 20px;
     height: 100%;
     overflow:hidden;
     width:100%;
@@ -35,8 +34,6 @@ iframe{
     width:100%;
     height:100%;
     border:0px;
-    margin-top:-100px;
-    margin-left:-20px;
 }
 #frm_grp{
   display:inline;
@@ -55,31 +52,62 @@ iframe{
   color : black;
   transition: all 0.50s;
 }
-
 .footer{
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: grey;
+  background-color: #21252b;
   color: white;
+  padding: 8px;
+  border-top : 1px solid black;
 }
-.footer > div{
-  float: left;
-  list-style-type: none;
+#footer_left div{
+  float : left;
+}
+#footer_right div{
+  float : right;
 }
 
+#float_container{
+  width : 100%;
+  min-width: 1000px;
+  height : 100%;
+}
 #float_right{
-  height: 100%;
-  float: left;
+  height: 96ex;
+  width : auto;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 #dir_tree{
-  height: 97.2vh;
-  background-color: #555;
-  float : left;
+  float:left;
+  height: 91.1ex;
+  width : 250px;
+  overflow: auto;
+  border-right: 1px solid black;
+  background-color: #282c34;
+  color : white;
   padding-left: 15px;
   cursor: context-menu;
 }
+
+::-webkit-scrollbar{ /*size of scrollbar*/
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track{ /*designing of track*/
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb{ /*thumb design*/
+  background: red;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover{
+  background: #b30000;
+}
+
 #dir_tree li:first-child{
   list-style-image: url('resource/expand_main_folder_set1.png');
 }

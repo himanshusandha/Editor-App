@@ -5,52 +5,58 @@
   <link rel="stylesheet" type="text/css" href="css_index.css">
 </head>
 <body>
-<div id="dir_tree">
-  <ul id="mainDirectoryUL">
-    <li id="mainDirectoryLi">Name</li>
-  </ul>
+<div id="float_container">
+  <div id="dir_tree">
+    <ul id="mainDirectoryUL">
+      <li id="mainDirectoryLi">Name</li>
+    </ul>
+  </div>
+
+  <div id="float_right">
+    <div id="btn_grp">
+      <button class="tablink" onclick="openPage('Frameeg1', this)" onmouseover="closebtndis(this)" onmouseout="closebtnin(this)">new 0.txt
+        <span onclick="closePage('Frameeg1',this)" class="closebtn">X</span>
+      </button>
+      <button class="tablink" onclick="openPage('Frameeg2', this)" onmouseover="closebtndis(this)" onmouseout="closebtnin(this)">index.html
+        <span onclick="closePage('Frameeg2',this)" class="closebtn">X</span>
+      </button>
+      <button class="tablink" onclick="openPage('Frameeg3', this)" onmouseover="closebtndis(this)" onmouseout="closebtnin(this)">new 1.txt
+        <span onclick="closePage('Frameeg3',this)" class="closebtn">X</span>
+      </button>
+      <button class="tablink" onclick="openPage('Frameeg4', this)" onmouseover="closebtndis(this)" onmouseout="closebtnin(this)">index 1.html
+        <span onclick="closePage('Frameeg4',this)" class="closebtn">X</span>
+      </button>
+    </div>
+
+    <div id="frm_grp">
+      <div id="Frameeg1" class="tabcontent">
+        <iframe src="coding_area.html"></iframe>
+      </div>
+      <div id="Frameeg2" class="tabcontent">
+        <iframe src="coding_area.html"></iframe>
+      </div>
+      <div id="Frameeg3" class="tabcontent">
+        <iframe src="coding_area.html"></iframe>
+      </div>
+      <div id="Frameeg4" class="tabcontent">
+        <iframe src="coding_area.html"></iframe>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div id="float_right">
-<div id="btn_grp">
-  <button class="tablink" onclick="openPage('Frameeg1', this)" onmouseover="closebtndis(this)" onmouseout="closebtnin(this)">new 0.txt
-    <span onclick="closePage('Frameeg1',this)" class="closebtn">X</span>
-  </button>
-  <button class="tablink" onclick="openPage('Frameeg2', this)" onmouseover="closebtndis(this)" onmouseout="closebtnin(this)">index.html
-    <span onclick="closePage('Frameeg2',this)" class="closebtn">X</span>
-  </button>
-  <button class="tablink" onclick="openPage('Frameeg3', this)" onmouseover="closebtndis(this)" onmouseout="closebtnin(this)">new 1.txt
-    <span onclick="closePage('Frameeg3',this)" class="closebtn">X</span>
-  </button>
-  <button class="tablink" onclick="openPage('Frameeg4', this)" onmouseover="closebtndis(this)" onmouseout="closebtnin(this)">index 1.html
-    <span onclick="closePage('Frameeg4',this)" class="closebtn">X</span>
-  </button>
-</div>
-
-<div id="frm_grp">
-  <div id="Frameeg1" class="tabcontent">
-    <iframe src="coding_area.html"></iframe>
-  </div>
-  <div id="Frameeg2" class="tabcontent">
-    <iframe src="coding_area.html"></iframe>
-  </div>
-  <div id="Frameeg3" class="tabcontent">
-    <iframe src="coding_area.html"></iframe>
-  </div>
-  <div id="Frameeg4" class="tabcontent">
-    <iframe src="coding_area.html"></iframe>
-  </div>
-</div>
-</div>
-
-<!--<div class="footer">
-
+<div class="footer">
+  <div id="footer_left">
     <div>name file</div>
     <div>total lines:lengthofchars</div>
     <div>current line:column name</div>
-    <div>encoding</div>
+  </div>
+  <div id="footer_right">
     <div>Fileformat</div>
-</div>-->
+    <div>encoding</div>
+    <div>file encoding</div>
+  </div>
+</div>
 
 <script src="close.js"></script>
 <script src="open.js"></script>
