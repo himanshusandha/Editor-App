@@ -76,6 +76,23 @@ ipcRenderer.on('appendUL', function(event,args){
     liElement.setAttribute("onclick", "open_file_dir(event)");
     let name_split = args[i].toString().split("\\"); //used .toString() to convert args to a string as it was giving TypeError
     liElement.textContent = name_split[(name_split.length)-1];
+    if(liElement.getAttribute("data-is-dir") == "false"){
+      let file_format_split = liElement.textContent.split(".");
+      let file_image = ['jpeg','jpg','jpe','jfif','tiff','tif','gif','bmp','dib','png','svg'];
+      let file_archive = ['7z','arc','dmg','rar','rzip','zip','apk','deb','rpm','msi','jar'];
+      for ( let j = 0; j < file_image.length; j++) {
+        if(file_image[j] == file_format_split[(file_format_split.length)-1]){
+          liElement.setAttribute("data-is-dir","false_image");
+          break;
+        }
+      }
+      for ( let j = 0; j < file_archive.length; j++) {
+        if(file_archive[j] == file_format_split[(file_format_split.length)-1]){
+          liElement.setAttribute("data-is-dir","false_archive");
+          break;
+        }
+      }
+    }
     ulElement.appendChild(liElement);
   }
   let li_element_list = document.getElementById('mainDirectoryUL').getElementsByTagName('li');

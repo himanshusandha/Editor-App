@@ -12,7 +12,6 @@ body,html{
     float: left; /*flow of tabs i.e starting from...*/
     border-color: black;
     outline: none;
-    cursor: pointer;
     padding: 10px;
     font-size: 14px;
     overflow: hidden; /*same due to below comment*/
@@ -50,7 +49,6 @@ iframe{
   font-size: 14px;
   width : 15px;
   font-weight: bold;
-  cursor: pointer;
 }
 .closebtn:hover{
   background-color: red;
@@ -71,6 +69,22 @@ iframe{
   list-style-type: none;
 }
 
-#mainDirectoryUL{
-  cursor: pointer;
+#dir_tree{
+  margin-left: 30px;
+  cursor: context-menu;
+}
+#dir_tree li:first-child{
+  list-style-image: url('resource/expand_main_folder_set1.png');
+}
+#mainDirectoryLi li[data-is-dir = "true"]{
+  list-style-image: url('resource/expand_folder_set1.png');
+}
+#mainDirectoryLi li[data-is-dir = "false"]{
+  list-style-image: url('resource/file_set1.png');
+}
+#mainDirectoryLi li[data-is-dir = "false_image"]{
+  list-style-image: url('resource/picture_set1.png');
+}
+#mainDirectoryLi li[data-is-dir = "false_archive"]{
+  list-style-image: url('resource/archive_set1.png');
 }
