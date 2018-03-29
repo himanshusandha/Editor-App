@@ -69,8 +69,15 @@ iframe{
   list-style-type: none;
 }
 
+#float_right{
+  height: 100%;
+  float: left;
+}
 #dir_tree{
-  margin-left: 30px;
+  height: 97.2vh;
+  background-color: #555;
+  float : left;
+  padding-left: 15px;
   cursor: context-menu;
 }
 #dir_tree li:first-child{

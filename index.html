@@ -5,6 +5,13 @@
   <link rel="stylesheet" type="text/css" href="css_index.css">
 </head>
 <body>
+<div id="dir_tree">
+  <ul id="mainDirectoryUL">
+    <li id="mainDirectoryLi">Name</li>
+  </ul>
+</div>
+
+<div id="float_right">
 <div id="btn_grp">
   <button class="tablink" onclick="openPage('Frameeg1', this)" onmouseover="closebtndis(this)" onmouseout="closebtnin(this)">new 0.txt
     <span onclick="closePage('Frameeg1',this)" class="closebtn">X</span>
@@ -34,6 +41,7 @@
     <iframe src="coding_area.html"></iframe>
   </div>
 </div>
+</div>
 
 <!--<div class="footer">
 
@@ -43,12 +51,6 @@
     <div>encoding</div>
     <div>Fileformat</div>
 </div>-->
-
-<div id="dir_tree" style="margin-top:-700px;">
-  <ul id="mainDirectoryUL">
-    <li id="mainDirectoryLi">Name</li>
-  </ul>
-</div>
 
 <script src="close.js"></script>
 <script src="open.js"></script>
@@ -109,9 +111,21 @@ function open_file_dir(event){
   if(event.target.getAttribute("data-is-dir") == "true"){
     if (event.target.childElementCount == 0) {
       ipcRenderer.send('readDirFunc',event.target.getAttribute("data-path"));
+      if(event.target.getAttribute("id") == "mainDirectoryLi"){
+        event.target.style.listStyleImage = "url('resource/colapse_main_folder_set1.png')";
+      }
+      else{
+        event.target.style.listStyleImage = "url('resource/colapse_folder_set1.png')";
+      }
     }
     else {
       event.target.children[0].remove();
+      if(event.target.getAttribute("id") == "mainDirectoryLi"){
+        event.target.style.listStyleImage = "url('resource/expand_main_folder_set1.png')";
+      }
+      else{
+        event.target.style.listStyleImage = "url('resource/expand_folder_set1.png')";
+      }
     }
   }
   else{
