@@ -17,6 +17,12 @@ function myOl_keydown(event) {
     let curr=document.getElementById('myOl').children[row_num].textContent.length;
     setTimeout(myTimer_backspace, 10,prev,curr);
   }
+  if(x==9){
+    event.preventDefault();
+    //let str = document.getElementById('myOl').children[row_num].textContent;
+    //let newstr = "    "+str;
+    //document.getElementById('myOl').children[row_num].textContent = newstr;
+  }
 }
 function myTimer_backspace(prev,curr) {
     if(row_num==0){}

@@ -28,32 +28,21 @@ const mainMenuTemplate=[
 				label: 'New File',
 				submenu : [
 					{
-						label : 'Coding Area',
-						submenu : [
-							{
-								label : 'HTML',
-								click(){
-									mainWindow.webContents.send('newFile', 'html');
-								}
-							},
-							{
-								label : 'C++',
-								click(){
-									mainWindow.webContents.send('newFile', 'cpp');
-								}
-							},
-							{
-								label : 'Java',
-								click(){
-									mainWindow.webContents.send('newFile', 'java');
-								}
-							},
-						]
+						label : 'HTML',
+						click(){
+							mainWindow.webContents.send('newFile', 'html');
+						}
 					},
 					{
-						label : 'Normal Text Area',
+						label : 'C++',
 						click(){
-
+							mainWindow.webContents.send('newFile', 'cpp');
+						}
+					},
+					{
+						label : 'Java',
+						click(){
+							mainWindow.webContents.send('newFile', 'java');
 						}
 					},
 				]

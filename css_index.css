@@ -16,6 +16,7 @@ body,html{
     font-size: 14px;
     overflow: hidden; /*same due to below comment*/
     white-space: nowrap; /*to stop overflow of content in div*/
+    max-height: 38px;
 }
 
 .tablink:hover {
@@ -56,6 +57,7 @@ iframe{
   position: fixed;
   left: 0;
   bottom: 0;
+  min-width: 1000px;
   width: 100%;
   background-color: #21252b;
   color: white;
@@ -64,9 +66,12 @@ iframe{
 }
 #footer_left div{
   float : left;
+  text-indent: 30px;
 }
 #footer_right div{
   float : right;
+  padding-right: 20px;
+  text-indent: 20px;
 }
 
 #float_container{
@@ -75,14 +80,15 @@ iframe{
   height : 100%;
 }
 #float_right{
-  height: 96ex;
+  height: 100%;
   width : auto;
   overflow-x: auto;
   overflow-y: hidden;
 }
 #dir_tree{
   float:left;
-  height: 91.1ex;
+  white-space: nowrap;
+  height: 94.9%;
   width : 250px;
   overflow: auto;
   border-right: 1px solid black;

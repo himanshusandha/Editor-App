@@ -1,5 +1,6 @@
 var row_num=0;
 function myOl_click_selectrow(event){
+  getCaretPosition(); //caret position function
   //for color portion on active element
   let n=document.getElementById("myOl").childElementCount;
   let c = document.getElementById("myOl").children;

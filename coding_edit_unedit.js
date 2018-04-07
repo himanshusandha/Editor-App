@@ -1,10 +1,10 @@
 function editable() {
-  if(document.getElementById("spanedit").innerHTML=="unedit"){
-    document.getElementById("spanedit").innerHTML="edit";
+  if(document.getElementById("imgedit").getAttribute("src")=="resource/unedit.png"){
+    document.getElementById("imgedit").setAttribute("src","resource/edit.png");
     document.getElementById("myOl").setAttribute("contenteditable","false");
   }
   else{
-    document.getElementById("spanedit").innerHTML="unedit";
+    document.getElementById("imgedit").setAttribute("src","resource/unedit.png");
     document.getElementById("myOl").setAttribute("contenteditable","true");
   }
 }

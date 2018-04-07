@@ -7,8 +7,9 @@
 <body>
 <div id="float_container">
   <div id="dir_tree">
+    <p id="dir_tree_title" align="center">Project</p>
     <ul id="mainDirectoryUL">
-      <li id="mainDirectoryLi">Name</li>
+      <li id="mainDirectoryLi">Folder Name</li>
     </ul>
   </div>
 
@@ -47,188 +48,26 @@
 
 <div class="footer">
   <div id="footer_left">
-    <div>name file</div>
-    <div>total lines:lengthofchars</div>
-    <div>current line:column name</div>
+    <div id="foot_filename">name file</div>
+    <div id="foot_line_And_length">total lines:lengthofchars</div>
+    <div id="foot_current_And_col">current line:columnnum</div>
   </div>
   <div id="footer_right">
-    <div>Fileformat</div>
-    <div>encoding</div>
-    <div>file encoding</div>
+    <div id="foot_file_format">Fileformat</div>
+    <div id="foot_encoding">encoding</div>
   </div>
 </div>
 
+<script>
+const {ipcRenderer,ipcMain}=require('electron');
+</script>
+<script src="currentFrameSelection.js"></script>
 <script src="close.js"></script>
 <script src="open.js"></script>
 <script src="general_script_index.js"></script>
-<script>
-const {ipcRenderer,ipcMain}=require('electron');
-
-//mainDir fun
-ipcRenderer.on('mainDir', function(event,args){
-  document.getElementById('mainDirectoryLi').setAttribute("data-path",args);
-  document.getElementById('mainDirectoryLi').setAttribute("data-is-dir","true");
-  document.getElementById('mainDirectoryLi').setAttribute("onclick","open_file_dir(event)");
-  let name_split = args.toString().split("\\"); //used .toString() to convert args to a string as it was giving TypeError
-  document.getElementById('mainDirectoryLi').textContent = name_split[(name_split.length)-1];
-  document.getElementById('mainDirectoryLi').click();
-});
-
-//appendUL fun
-ipcRenderer.on('appendUL', function(event,args){
-  let ulElement = document.createElement('UL');
-  for ( i = 1; i <= args[0]; i++) { //i=0 because at 0 index lentgh is stored
-    let liElement = document.createElement('LI');
-    liElement.setAttribute("data-path", args[i]);
-    liElement.setAttribute("data-is-dir", args[args[0]+i]);
-    liElement.setAttribute("onclick", "open_file_dir(event)");
-    let name_split = args[i].toString().split("\\"); //used .toString() to convert args to a string as it was giving TypeError
-    liElement.textContent = name_split[(name_split.length)-1];
-    if(liElement.getAttribute("data-is-dir") == "false"){
-      let file_format_split = liElement.textContent.split(".");
-      let file_image = ['jpeg','jpg','jpe','jfif','tiff','tif','gif','bmp','dib','png','svg'];
-      let file_archive = ['7z','arc','dmg','rar','rzip','zip','apk','deb','rpm','msi','jar'];
-      for ( let j = 0; j < file_image.length; j++) {
-        if(file_image[j] == file_format_split[(file_format_split.length)-1]){
-          liElement.setAttribute("data-is-dir","false_image");
-          break;
-        }
-      }
-      for ( let j = 0; j < file_archive.length; j++) {
-        if(file_archive[j] == file_format_split[(file_format_split.length)-1]){
-          liElement.setAttribute("data-is-dir","false_archive");
-          break;
-        }
-      }
-    }
-    ulElement.appendChild(liElement);
-  }
-  let li_element_list = document.getElementById('mainDirectoryUL').getElementsByTagName('li');
-  for (i = 0; i < li_element_list.length; i++) {
-    if (li_element_list[i].getAttribute('data-path') == args[args[0]+args[0]+1]) {
-      li_element_list[i].appendChild(ulElement);
-      break;
-    }
-  }
-});
-
-//open_file_dir
-function open_file_dir(event){
-  if(event.target.getAttribute("data-is-dir") == "true"){
-    if (event.target.childElementCount == 0) {
-      ipcRenderer.send('readDirFunc',event.target.getAttribute("data-path"));
-      if(event.target.getAttribute("id") == "mainDirectoryLi"){
-        event.target.style.listStyleImage = "url('resource/colapse_main_folder_set1.png')";
-      }
-      else{
-        event.target.style.listStyleImage = "url('resource/colapse_folder_set1.png')";
-      }
-    }
-    else {
-      event.target.children[0].remove();
-      if(event.target.getAttribute("id") == "mainDirectoryLi"){
-        event.target.style.listStyleImage = "url('resource/expand_main_folder_set1.png')";
-      }
-      else{
-        event.target.style.listStyleImage = "url('resource/expand_folder_set1.png')";
-      }
-    }
-  }
-  else{
-    ipcRenderer.send('openreadFileFromTree',event.target.getAttribute("data-path"));
-  }
-  event.stopPropagation();
-}
-
-//newFile
-ipcRenderer.on('newFile', function(event,args){
-  //selection of frame name
-  let frm_grp_content=document.getElementById('frm_grp').children;
-  let frm_grp_id=[];
-  let frm_set_name='Frameeg'+(frm_grp_content.length+1);
-  for (i = 0; i < frm_grp_content.length; i++) {
-    frm_grp_id[i]=frm_grp_content[i].getAttribute('id');
-  }
-  frm_grp_id.sort();
-  for(i=0;i<frm_grp_content.length;i++){
-    if(frm_grp_id[i]!='Frameeg'+(i+1)){
-      frm_set_name='Frameeg'+(i+1);
-      break;
-    }
-  }
-
-  //creation of new file
-  let btn = document.createElement("button");
-  btn.setAttribute("class","tablink");
-  btn.setAttribute("onclick","openPage('"+frm_set_name+"', this)");
-  btn.setAttribute("onmouseover","closebtndis(this)");
-  btn.setAttribute("onmouseout","closebtnin(this)");
-
-  let name_split=args.split("\\");
-  if(name_split.length==1){
-    btn.innerHTML="untitled." +args;
-  }
-  else{
-    btn.innerHTML= name_split[(name_split.length)-1];
-  }
-
-  let sp=document.createElement("span");
-  sp.setAttribute("onclick","closePage('"+frm_set_name+"',this)");
-  sp.setAttribute("class","closebtn");
-  sp.innerHTML="X";
-
-  btn.appendChild(sp);
-  document.getElementById("btn_grp").appendChild(btn);
-
-  let div_frm=document.createElement("div");
-  div_frm.setAttribute("id",frm_set_name);
-  div_frm.setAttribute("class","tabcontent");
-
-  let ifrm=document.createElement("iframe");
-  ifrm.setAttribute("src","coding_area.html");
-
-  div_frm.appendChild(ifrm);
-  document.getElementById('frm_grp').appendChild(div_frm);
-
-  btn.click();
-});
-
-//openFile
-  ipcRenderer.on('openFile', function(event,args){
-    selectCurrentTab();
-    setTimeout(() => {
-      ifrm_contentWindow.showData(args);
-    }, 100);
-  });
-
-//saveFile
-  ipcRenderer.on('saveFile', function(event,args){
-    selectCurrentTab();
-    let saveText=ifrm_contentWindow.getData(args);
-    ipcRenderer.send('saveData',saveText);
-  });
-
-//saveFileisalreadysaved
-  ipcRenderer.on('isFileSaved', function(event,args){
-    selectCurrentTab();
-    let bool_isFileSaved=ifrm_contentWindow.getFileName();
-    ipcRenderer.send('bool_val',bool_isFileSaved);
-  });
-
-  var ifrm_contentWindow;
-  function selectCurrentTab(){
-    let tabcontent=document.getElementsByClassName("tabcontent");
-    let currentArea;
-    for(i=0;i<tabcontent.length;i++){
-      if(tabcontent[i].style.display=="block"){
-        currentArea=tabcontent[i].getAttribute('id');//frameeg+(i+1)
-        break;
-      }
-    }
-    let ifrm=document.getElementById(currentArea).children[0];
-    ifrm_contentWindow=ifrm.contentWindow;
-  }
-</script>
-
+<script src="tree_functions.js"></script>
+<script src="newFile_frame_tab_function.js"></script>
+<script src="open_save_file_function.js"></script>
+<script src="index_footer_function.js"></script>
 </body>
 </html>
