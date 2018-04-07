@@ -15,11 +15,9 @@ function selectCurrentTabLink() {
   let tablink = document.getElementsByClassName("tablink");
   for(i=0;i<tablink.length;i++){
     if(tablink[i].style.backgroundColor != ""){
-      let str_split = tablink[i].textContent.split(" ");
-      let nameFile = str_split.slice(0,str_split.length-14); //selects 1st index but excludes last index
-      document.getElementById('foot_filename').textContent = nameFile.join(" ");
-      let joinnameFile = nameFile.join(" ");
-      let format = joinnameFile.split(".");
+      let name = tablink[i].innerHTML.split("<span");
+      document.getElementById('foot_filename').textContent = name[0];
+      let format = name[0].split(".");
       document.getElementById('foot_file_format').textContent = format[format.length-1];
       break;
     }
