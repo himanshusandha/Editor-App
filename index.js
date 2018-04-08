@@ -6,6 +6,7 @@ const fs=require("fs");
 const{app,BrowserWindow,Menu,ipcMain,dialog}=electron;
 
 let mainWindow;
+let googleSearch;
 
 app.on('ready',function(){
 	const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize;
@@ -25,27 +26,23 @@ const mainMenuTemplate=[
 		label : 'File',
 		submenu : [
 			{
+				label: 'New Window',
+				click(){
+					const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize;
+					mainWindow=new BrowserWindow({width, height}),
+					mainWindow.loadURL(url.format({
+					pathname:path.join(__dirname,'index.html'),
+					protocol:'file:',
+					slashes:true
+					}));
+				}
+			},
+			{
 				label: 'New File',
-				submenu : [
-					{
-						label : 'HTML',
-						click(){
-							mainWindow.webContents.send('newFile', 'html');
-						}
-					},
-					{
-						label : 'C++',
-						click(){
-							mainWindow.webContents.send('newFile', 'cpp');
-						}
-					},
-					{
-						label : 'Java',
-						click(){
-							mainWindow.webContents.send('newFile', 'java');
-						}
-					},
-				]
+				accelerator : 'ctrl+n',
+				click(){
+					mainWindow.webContents.send('newFile', 'txt');
+				}
 			},
 			{
 				label : 'Open File',
@@ -104,6 +101,24 @@ const mainMenuTemplate=[
 			{role: 'paste'},
 			{role: 'delete'},
 			{role: 'selectall'},
+			{type: 'separator'},
+			{
+				label : 'Wrap Content',
+				submenu : [
+					{
+						label : 'Wrap on',
+						click(){
+							mainWindow.webContents.send('wrapOn');
+						}
+					},
+					{
+						label : 'Wrap off',
+						click(){
+							mainWindow.webContents.send('wrapOff');
+						}
+					},
+				]
+			},
 		]
 	},
 	//3rd menuitem
@@ -138,6 +153,19 @@ const mainMenuTemplate=[
 		]
 	},
 	//7th menuitem
+	{
+		label: 'Google',
+		click(){
+			const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize;
+			googleSearch=new BrowserWindow({width, height}),
+			googleSearch.loadURL(url.format({
+			pathname:path.join('www.google.com'),
+			protocol:'https:',
+			slashes:true
+			}));
+		}
+	},
+	//8th menuitem
 	{
 		role: 'help',
 		submenu: [

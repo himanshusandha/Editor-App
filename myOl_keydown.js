@@ -23,7 +23,11 @@ function myOl_keydown(event) {
     //let newstr = "    "+str;
     //document.getElementById('myOl').children[row_num].textContent = newstr;
   }
+  if(x==37){//left
+    previous_caretPos = caretPos;
+  }
 }
+let previous_caretPos=0;
 function myTimer_backspace(prev,curr) {
     if(row_num==0){}
     else if(document.getElementById('myOl').children[row_num-1].textContent.length==(prev+curr)){
