@@ -119,6 +119,18 @@ const mainMenuTemplate=[
 					},
 				]
 			},
+			{
+				label : 'Lower Case',
+				click(){
+					mainWindow.webContents.send('lowerCase');
+				}
+			},
+			{
+				label : 'Upper Case',
+				click(){
+					mainWindow.webContents.send('upperCase');
+				}
+			},
 		]
 	},
 	//3rd menuitem
@@ -139,6 +151,33 @@ const mainMenuTemplate=[
 	//4th menuitem
 	{
 		label : 'Search',
+		submenu : [
+			{
+				label : 'Find in row',
+				click(){
+					mainWindow.webContents.send('findText','row');
+				}
+			},
+			{
+				label : 'Replace in row',
+				click(){
+					mainWindow.webContents.send('replaceText','row');
+				}
+			},
+			{type: 'separator'},
+			{
+				label : 'Find in page',
+				click(){
+					mainWindow.webContents.send('findText','page');
+				}
+			},
+			{
+				label : 'Replace in page',
+				click(){
+					mainWindow.webContents.send('replaceText','page');
+				}
+			},
+		]
 	},
 	//5th menuitem
 	{
@@ -175,7 +214,19 @@ const mainMenuTemplate=[
 			click () {electron.shell.openExternal('www.himanshusandha.wordpress.com')}
 		  }
 		]
-	}
+	},
+	//9th
+	{
+		label : 'cmd',
+		click(){
+			if(process.platform=="win32"){
+				electron.shell.openItem('C:\\Windows\\System32\\cmd.exe');
+			}
+			if(process.platform!="win32"){
+				dialog.showMessageBox({message:"Sorry, cmd is only supported by Windows !",buttons:["OK"]});
+			}
+		}
+	},
 ]
 
 if(process.platform=="darwin"){

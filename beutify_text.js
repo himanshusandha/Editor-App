@@ -1,6 +1,6 @@
 setInterval(function beutify_string() {
-  let liEl = document.getElementById('myOl').children[row_num].textContent;
-  mdocument.execCommand('ForeColor',false,'#ff000');
+  //let liEl = document.getElementById('myOl').children[row_num].textContent;
+  //mdocument.execCommand('ForeColor',false,'#ff000');
   /*let str_split = liEl.textContent.split(' ');
   liEl.innerHTML = "";
   for (let i = 0; i < str_split.length; i++) {

@@ -129,3 +129,47 @@ iframe{
 #mainDirectoryLi li[data-is-dir = "false_archive"]{
   list-style-image: url('resource/archive_set1.png');
 }
+
+#find_divEl{
+  position: absolute;
+  top: 20px;
+  left : 50%;
+}
+#find_divEl input{
+  padding: 10px;
+  border: 0px;
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+}
+#find_divEl button{
+  padding: 10px;
+  border: 0px;
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+}
+
+#replace_divEl{
+  position: absolute;
+  top: 20px;
+  left : 50%;
+}
+#replace_divEl p{
+  color : white;
+  text-indent: 100px;
+}
+#replace_divEl input{
+  padding: 10px;
+  border: 0px;
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+}
+#replace_divEl button{
+  padding: 10px;
+  border: 0px;
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+}
