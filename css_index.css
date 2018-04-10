@@ -115,10 +115,10 @@ iframe{
 }
 
 #dir_tree li:first-child{
-  list-style-image: url('resource/expand_main_folder_set1.png');
+  list-style-image: url('resource/colapse_main_folder_set1.png');
 }
 #mainDirectoryLi li[data-is-dir = "true"]{
-  list-style-image: url('resource/expand_folder_set1.png');
+  list-style-image: url('resource/colapse_folder_set1.png');
 }
 #mainDirectoryLi li[data-is-dir = "false"]{
   list-style-image: url('resource/file_set1.png');

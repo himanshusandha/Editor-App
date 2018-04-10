@@ -182,6 +182,33 @@ const mainMenuTemplate=[
 	//5th menuitem
 	{
 		label : 'Setting',
+		submenu : [
+			{
+				label : 'Tree Icon',
+				submenu : [
+					{
+						label : 'Mac OS',
+						click(){mainWindow.webContents.send('treeThemeNum','0');}
+					},
+					{
+						label : 'Black & White',
+						click(){mainWindow.webContents.send('treeThemeNum','1');}
+					},
+					{
+						label : 'Material 1',
+						click(){mainWindow.webContents.send('treeThemeNum','2');}
+					},
+					{
+						label : 'Blue & White',
+						click(){mainWindow.webContents.send('treeThemeNum','3');}
+					},
+					{
+						label : 'Material 2',
+						click(){mainWindow.webContents.send('treeThemeNum','4');}
+					},
+				]
+			},
+		]
 	},
 	//6th menuitem
 	{
