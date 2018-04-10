@@ -21,7 +21,8 @@ function open_file_dir(event){
     }
   }
   else{
-    ipcRenderer.send('openreadFileFromTree',event.target.getAttribute("data-path"));
+    let attr_list = [event.target.getAttribute("data-path"),event.target.getAttribute("data-is-dir")];
+    ipcRenderer.send('openreadFileFromTree',attr_list);
   }
   event.stopPropagation();
 }

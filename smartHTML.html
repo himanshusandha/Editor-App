@@ -1,0 +1,55 @@
+<!Doctype html>
+<html>
+  <head>
+    <title>Editor App</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css_smart.css">
+  </head>
+	<body onLoad="iFrameOn()">
+		<div id="form1">
+			<div id="btn_collection">
+				<div class="btn"><button onClick="iBold()"><img src="resource/bold.jpg">bold</button></div>
+				<div class="btn"><button onClick="iUnderline()"><img src="resource/underline.jpg">underline</button></div>
+				<div class="btn"><button onClick="iItalic()"><img src="resource/italic.jpg">italic</button></div>
+
+				<div class="btn"><input type="number" id='fontSize' min="1" max="7" placeholder="fontSize">
+				<button onclick="iFontSize()"><img src="resource/fontsize.jpg">fontSize</button></div>
+
+				<div class="btn"><input type="color" id='foreColor' placeholder="ForeColor">
+				<button onclick="iForeColor()">foreColor</button></div>
+
+				<div class="btn"><button onClick="iHorizontalRule()">Horizontal Line</button></div>
+				<div class="btn"><button onClick="iUnorderedList()"><img src="resource/ul.jpg">UnorderedList </button></div>
+				<div class="btn"><button onClick="iOrderedList()"><img src="resource/ol.jpg">OrderedList</button></div>
+
+        <div class="btn"><input type="text" id="link" placeholder="link">
+				<button onClick="iLink()"><img src="resource/link.jpg">createLink</button></div>
+
+				<div class="btn"><button onClick="iUnLink()"><img src="resource/unlink.jpg">unlink</button></div>
+
+				<div class="btn"><input type="text" id="image" placeholder="imageURL">
+        <button onClick="iImage()"><img src="resource/insertImage.jpg">Insert</button></div>
+
+        <div class="btn"><button onclick="iJustifyCenter()"><img src="resource/justifycenter.jpg">justifyCenter</button></div>
+        <div class="btn"><button onclick="iJustifyFull()"><img src="resource/justifyfull.jpg">justifyFull</button></div>
+        <div class="btn"><button onclick="iJustifyLeft()"><img src="resource/justifyleft.jpg">justifyLeft</button></div>
+        <div class="btn"><button onclick="iJustifyRight()"><img src="resource/justifyright.jpg">justifyRight</button></div>
+        <div class="btn"><button onclick="iIndent()"><img src="resource/indent.jpg">indent</button></div>
+        <div class="btn"><button onclick="iOutdent()"><img src="resource/outdent.jpg">outdent</button></div>
+        <div class="btn"><button onclick="iSelectAll()">selectAll</button></div>
+        <div class="btn"><button onclick="iUndo()"><img src="resource/undo.jpg">undo</button></div>
+        <div class="btn"><button onclick="iRedo()"><img src="resource/redo.jpg">redo</button></div>
+        <div class="btn"><button onclick="iStrikeThrough()"><img src="resource/strikeThrough.jpg">strikeThrough</button></div>
+        <div class="btn"><button onclick="iSubscript()"><img src="resource/subscript.jpg">subscript</button></div>
+        <div class="btn"><button onclick="iSuperscript()"><img src="resource/superscript.jpg">superscript</button></div>
+        <div class="btn"><button onclick="iCut()"><img src="resource/cut.jpg">cut</button></div>
+        <div class="btn"><button onclick="iCopy()"><img src="resource/copy.jpg">copy</button></div>
+        <div class="btn"><button onclick="iPaste()"><img src="resource/paste.jpg">paste</button></div>
+        <div class="btn"><button onclick="iDelete()"><img src="resource/delete.jpg">delete</button></div>
+
+			</div>
+			<iframe name="richTextField" id="richTextField"></iframe>
+		</div>
+	</body>
+	<script src="smart_html_all_function.js"></script>
+</html>

@@ -9,15 +9,21 @@ let mainWindow;
 let googleSearch;
 
 app.on('ready',function(){
-	const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize;
-	mainWindow=new BrowserWindow({width, height}),
+	mainWindow=new BrowserWindow({show: false,});
+	mainWindow.once('ready-to-show',()=>{
+		mainWindow.show();
+	});
 	mainWindow.loadURL(url.format({
 	pathname:path.join(__dirname,'index.html'),
 	protocol:'file:',
 	slashes:true
 	}));
+	mainWindow.maximize();
 	const mainMenu=Menu.buildFromTemplate(mainMenuTemplate); //Build Menu from Template
 	Menu.setApplicationMenu(mainMenu);  //Insert Menu
+	mainWindow.on('close', ()=> {
+		mainWindow= null;
+	});
 });
 
 const mainMenuTemplate=[
@@ -26,22 +32,18 @@ const mainMenuTemplate=[
 		label : 'File',
 		submenu : [
 			{
-				label: 'New Window',
-				click(){
-					const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize;
-					mainWindow=new BrowserWindow({width, height}),
-					mainWindow.loadURL(url.format({
-					pathname:path.join(__dirname,'index.html'),
-					protocol:'file:',
-					slashes:true
-					}));
-				}
-			},
-			{
 				label: 'New File',
 				accelerator : 'ctrl+n',
 				click(){
 					mainWindow.webContents.send('newFile', 'txt');
+				}
+			},
+			{
+				label: 'New Smart html file ',
+				accelerator : 'ctrl+shift+n',
+				click(){
+					mainWindow.webContents.send('newFile','html');
+					mainWindow.webContents.send('openSmartHTML','');
 				}
 			},
 			{
@@ -321,7 +323,13 @@ ipcMain.on('readDirFunc',(event, arg) => {
 });
 
 ipcMain.on('openreadFileFromTree',(event, arg) =>{
-	readTheFile(arg);
+	if(arg[1] != "false_image"){ //its file or anything else other than image
+		readTheFile(arg[0]);
+	}
+	else if(arg[1] == "false_image"){
+		mainWindow.webContents.send('newFile',arg[0]);
+		mainWindow.webContents.send('openImage',arg[0]);
+	}
 });
 function readTheFile(filename){
 	fs.readFile(filename,"utf-8",(err,data) => {

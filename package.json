@@ -4,8 +4,11 @@
   "description": "A Cross Platform Editor App",
   "main": "index.js",
   "scripts": {
-  	"start" : "electron ."
-	},
-  "author" : "Himanshu",
-  "license": "ISC"
+    "start": "electron ."
+  },
+  "author": "Himanshu",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^1.8.4"
+  }
 }
