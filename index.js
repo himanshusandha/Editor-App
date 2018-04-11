@@ -21,10 +21,17 @@ app.on('ready',function(){
 	mainWindow.maximize();
 	const mainMenu=Menu.buildFromTemplate(mainMenuTemplate); //Build Menu from Template
 	Menu.setApplicationMenu(mainMenu);  //Insert Menu
-	mainWindow.on('close', ()=> {
+	mainWindow.on('closed', ()=> {
 		mainWindow= null;
 	});
+	mainWindow.on('close',() => {
+		mainWindow.webContents.send('saveToStorage','');
+	});
 });
+
+setTimeout(function(){
+	mainWindow.webContents.send('readFromStorage','');
+},2000);
 
 const mainMenuTemplate=[
 	//1st menuitem
@@ -33,14 +40,14 @@ const mainMenuTemplate=[
 		submenu : [
 			{
 				label: 'New File',
-				accelerator : 'ctrl+n',
+				accelerator : 'CmdOrCtrl+n',
 				click(){
 					mainWindow.webContents.send('newFile', 'txt');
 				}
 			},
 			{
 				label: 'New Smart html file ',
-				accelerator : 'ctrl+shift+n',
+				accelerator : 'CmdOrCtrl+shift+n',
 				click(){
 					mainWindow.webContents.send('newFile','html');
 					mainWindow.webContents.send('openSmartHTML','');
@@ -48,7 +55,7 @@ const mainMenuTemplate=[
 			},
 			{
 				label : 'Open File',
-				accelerator : 'ctrl+o',
+				accelerator : 'CmdOrCtrl+o',
 				click(){
 					dialog.showOpenDialog((fileNames) => {
 						if(fileNames === undefined){
@@ -61,7 +68,7 @@ const mainMenuTemplate=[
 			},
 			{
 				label : 'Open Folder',
-				accelerator : 'ctrl+shift+o',
+				accelerator : 'CmdOrCtrl+shift+o',
 				click(){
 					let dirpath=dialog.showOpenDialog({properties: ['openDirectory']});
 					mainWindow.webContents.send('mainDir',dirpath);
@@ -69,7 +76,7 @@ const mainMenuTemplate=[
 			},
 			{
 				label : 'Save',
-				accelerator : 'ctrl+s',
+				accelerator : 'CmdOrCtrl+s',
 				click(){
 					mainWindow.webContents.send('isFileSaved');
 					//bool_valipcMain would be executed
@@ -77,14 +84,23 @@ const mainMenuTemplate=[
 			},
 			{
 				label : 'Save As',
-				accelerator : 'ctrl+shift+s',
+				accelerator : 'CmdOrCtrl+shift+s',
 				click(){
 					saveAsFunc();
 				}
 			},
+			{type: 'separator'},
+			{
+				label : 'Print',
+				accelerator : 'CmdOrCtrl+p',
+				click(){
+					mainWindow.webContents.send('printPage','');
+				}
+			},
+			{type: 'separator'},
 			{
 				label : 'Quit',
-				accelerator : 'ctrl+Q',
+				accelerator : 'CmdOrCtrl+Q',
 				click(){
 					app.quit();
 				}
@@ -103,6 +119,10 @@ const mainMenuTemplate=[
 			{role: 'paste'},
 			{role: 'delete'},
 			{role: 'selectall'},
+			{type: 'separator'},
+			{label: 'bold',accelerator: 'CmdOrCtrl+B'},
+			{label: 'underline',accelerator: 'CmdOrCtrl+U'},
+			{label: 'italic',accelerator: 'CmdOrCtrl+I'},
 			{type: 'separator'},
 			{
 				label : 'Wrap Content',
@@ -123,12 +143,14 @@ const mainMenuTemplate=[
 			},
 			{
 				label : 'Lower Case',
+				accelerator : 'CmdOrCtrl+shift+l',
 				click(){
 					mainWindow.webContents.send('lowerCase');
 				}
 			},
 			{
 				label : 'Upper Case',
+				accelerator : 'CmdOrCtrl+shift+u',
 				click(){
 					mainWindow.webContents.send('upperCase');
 				}
@@ -156,12 +178,14 @@ const mainMenuTemplate=[
 		submenu : [
 			{
 				label : 'Find in row',
+				accelerator : 'CmdOrCtrl+f',
 				click(){
 					mainWindow.webContents.send('findText','row');
 				}
 			},
 			{
 				label : 'Replace in row',
+				accelerator : 'CmdOrCtrl+d',
 				click(){
 					mainWindow.webContents.send('replaceText','row');
 				}
@@ -169,12 +193,14 @@ const mainMenuTemplate=[
 			{type: 'separator'},
 			{
 				label : 'Find in page',
+				accelerator : 'CmdOrCtrl+shift+f',
 				click(){
 					mainWindow.webContents.send('findText','page');
 				}
 			},
 			{
 				label : 'Replace in page',
+				accelerator : 'CmdOrCtrl+shift+d',
 				click(){
 					mainWindow.webContents.send('replaceText','page');
 				}
@@ -239,7 +265,7 @@ const mainMenuTemplate=[
 		submenu: [
 		  {
 			label: 'Learn More',
-			accelerator : 'ctrl+H',
+			accelerator : 'CmdOrCtrl+H',
 			click () {electron.shell.openExternal('www.himanshusandha.wordpress.com')}
 		  }
 		]
@@ -341,3 +367,7 @@ function readTheFile(filename){
 		mainWindow.webContents.send('openFile',data);
 	});
 }
+
+ipcMain.on('restoreFiles',(event,arg) =>{
+	readTheFile(arg);
+});

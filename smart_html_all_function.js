@@ -121,3 +121,7 @@ function iDelete() {
  function getFileName(){
    return filename;
  }
+ 
+ function printIt() {
+   window.print();
+ }

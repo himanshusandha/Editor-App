@@ -36,3 +36,17 @@ img{
 ::-webkit-scrollbar-thumb:hover{
   background: #b30000;
 }
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #imageTag, #imageTag * {
+    visibility: visible;
+  }
+  #imageTag {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}

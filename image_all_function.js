@@ -22,3 +22,6 @@ function replaceWord(arg1,arg2,replace_option) {}
 function setImageSrc(args){
   document.getElementById('imageTag').setAttribute('src',args);
 }
+function printIt() {
+  window.print();
+}

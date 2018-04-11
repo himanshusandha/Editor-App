@@ -37,3 +37,17 @@ button{
 ::-webkit-scrollbar-thumb:hover{
   background: #b30000;
 }
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #richTextField, #richTextField * {
+    visibility: visible;
+  }
+  #richTextField {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}

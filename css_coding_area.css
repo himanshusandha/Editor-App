@@ -79,3 +79,17 @@
   padding: 2px;
   background-color: #2c323c;
 }
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #myOl, #myOl * {
+    visibility: visible;
+  }
+  #myOl {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
