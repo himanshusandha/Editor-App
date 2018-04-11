@@ -10,3 +10,6 @@ function currRow() {
 function columnPos() {
   return caretPos;
 }
+function dataChange() {
+  return textChange;
+}

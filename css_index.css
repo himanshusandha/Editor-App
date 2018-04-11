@@ -73,6 +73,9 @@ iframe{
   padding-right: 20px;
   text-indent: 20px;
 }
+#foot_dataChange{
+  color : red;
+}
 
 #float_container{
   width : 100%;

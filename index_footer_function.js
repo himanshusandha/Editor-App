@@ -5,9 +5,11 @@ setInterval(function footerValues() {
   let char_length = ifrm_contentWindow.charLength();
   let curr_row = ifrm_contentWindow.currRow();
   let column_pos = ifrm_contentWindow.columnPos();
+  let Changed = ifrm_contentWindow.dataChange();
 
   document.getElementById('foot_line_And_length').textContent = "Lines :"+total_line+" | Length :"+char_length;
   document.getElementById('foot_current_And_col').textContent = "Ln :"+curr_row+" | Col :"+column_pos;
+  document.getElementById('foot_dataChange').textContent = Changed;
   document.getElementById('foot_encoding').textContent = "UTF-8";
 },300);
 

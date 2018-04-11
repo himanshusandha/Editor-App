@@ -16,8 +16,13 @@ function getData(fname) {
   for (i = 0; i < n; i++) {
       saveText=saveText + c[i].textContent + "\n";
   }
+  textChange = '';  //to show that file is saved and their is no text altered yet
   return saveText;
 }
 function getFileName(){
   return filename;
+}
+let textChange = '';
+function change(){
+  textChange = 'File altered*';
 }

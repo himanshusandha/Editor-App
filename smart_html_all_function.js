@@ -103,6 +103,9 @@ function iDelete() {
  function columnPos() {
    return 0;
  }
+ function dataChange() {
+ 	return '';
+ }
  function setWrapOn() {}
  function setWrapOff() {}
  function setLowerCase() {}
@@ -121,7 +124,7 @@ function iDelete() {
  function getFileName(){
    return filename;
  }
- 
+
  function printIt() {
    window.print();
  }

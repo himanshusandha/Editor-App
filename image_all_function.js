@@ -11,6 +11,9 @@ function currRow() {
 function columnPos() {
   return 0;
 }
+function dataChange() {
+  return '';
+}
 function setWrapOn() {}
 function setWrapOff() {}
 function setLowerCase() {}
