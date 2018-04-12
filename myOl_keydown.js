@@ -17,11 +17,15 @@ function myOl_keydown(event) {
     let curr=document.getElementById('myOl').children[row_num].textContent.length;
     setTimeout(myTimer_backspace, 10,prev,curr);
   }
-  if(x==9){
+  if(x==9){//tab
     event.preventDefault();
-    //let str = document.getElementById('myOl').children[row_num].textContent;
-    //let newstr = "    "+str;
-    //document.getElementById('myOl').children[row_num].textContent = newstr;
+    let str = document.getElementById('myOl').children[row_num].textContent;
+    let tabSpace = '   ';
+    let strFirstPart = str.substring(0,caretPos);
+    let strSecondPart = str.substring(caretPos,str.length);
+    str = strFirstPart+tabSpace+strSecondPart;
+    document.getElementById('myOl').children[row_num].innerHTML = str;
+    moveCaret();
   }
   if(x==37){//left
     previous_caretPos = caretPos;

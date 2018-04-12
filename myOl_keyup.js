@@ -23,4 +23,7 @@ function myOl_keyup(event) {
       row_num--;
     }
   }
+  if(x==32){//space
+    beutify_string();
+  }
 }

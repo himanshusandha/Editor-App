@@ -3,7 +3,7 @@ function findWord(arg,search_option) {
     let liEl = document.getElementById('myOl').children[row_num];
     let str = liEl.textContent;
     let regex = new RegExp(arg,'g');
-    str=str.replace(regex,"<span>"+arg+"</span>");
+    str=str.replace(regex,"<span style='padding:2px;background-color:#2c323c;'>"+arg+"</span>");
     liEl.innerHTML = str;
     setTimeout(() =>{
       liEl.innerHTML = liEl.textContent;
@@ -17,7 +17,7 @@ function findWord(arg,search_option) {
     }
     let regex = new RegExp(arg,'g');
     for(let i=0;i<liEl.length;i++){
-      str[i]=str[i].replace(regex,"<span>"+arg+"</span>");
+      str[i]=str[i].replace(regex,"<span style='padding:2px;background-color:#2c323c;'>"+arg+"</span>");
       liEl[i].innerHTML = str[i];
     }
     setTimeout(() =>{
@@ -32,7 +32,7 @@ function replaceWord(arg1,arg2,replace_option) {
     let liEl = document.getElementById('myOl').children[row_num];
     let str = liEl.textContent;
     let regex = new RegExp(arg1,'g');
-    str=str.replace(regex,"<span>"+arg2+"</span>");
+    str=str.replace(regex,"<span style='padding:2px;background-color:#2c323c;'>"+arg2+"</span>");
     liEl.innerHTML = str;
     setTimeout(() =>{
       liEl.innerHTML = liEl.textContent;
@@ -46,7 +46,7 @@ function replaceWord(arg1,arg2,replace_option) {
     }
     let regex = new RegExp(arg1,'g');
     for(let i=0;i<liEl.length;i++){
-      str[i]=str[i].replace(regex,"<span>"+arg2+"</span>");
+      str[i]=str[i].replace(regex,"<span style='padding:2px;background-color:#2c323c;'>"+arg2+"</span>");
       liEl[i].innerHTML = str[i];
     }
     setTimeout(() =>{

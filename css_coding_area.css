@@ -13,9 +13,10 @@
     caret-color: red; /*pointer color*/
   }
   #listing>ol>li{
-    white-space: pre-line;
+    white-space: pre-wrap;
+    word-spacing: 5px;;
     font-size: 18px;
-    text-indent: 40px;
+    text-indent: 15px;
     color : white;
   }
 
@@ -74,11 +75,6 @@
   ::-webkit-scrollbar-thumb:hover{
     background: #b30000;
   }
-
-#myOl li span{
-  padding: 2px;
-  background-color: #2c323c;
-}
 
 @media print {
   body * {
