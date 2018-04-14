@@ -1,8 +1,10 @@
 let caretPos=0;
 function getCaretPosition() {
-  if (window.getSelection && window.getSelection().getRangeAt) {
-    let range = window.getSelection().getRangeAt(0);
-    caretPos= range.startOffset;
-  }
+  element = document.getElementById('myOl').children[row_num];
+  let range = document.getSelection().getRangeAt(0);
+  let preCaretRange = range.cloneRange();
+  preCaretRange.selectNodeContents(element);
+  preCaretRange.setEnd(range.endContainer, range.endOffset);
+  caretPos = preCaretRange.toString().length;
   return -1;
 }

@@ -10,19 +10,6 @@ function myOl_keyup(event) {
   if(x==13){ //enter
     row_num++;
   }
-  if(x==39){//right
-    if(caretPos==0 && document.getElementById("myOl").childElementCount!=row_num+1){
-      row_num++;
-    }
-  }
-  if(x==37){//left
-    if(previous_caretPos ==0  && row_num!=0){ //previous one is 0 than surely cursor is on new
-      row_num--;
-    }
-    else if(previous_caretPos == caretPos && row_num!=0){ //if previous line and current line are has 0 length
-      row_num--;
-    }
-  }
   if(x==32){//space
     beutify_string();
   }

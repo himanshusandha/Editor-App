@@ -17,21 +17,18 @@ function myOl_keydown(event) {
     let curr=document.getElementById('myOl').children[row_num].textContent.length;
     setTimeout(myTimer_backspace, 10,prev,curr);
   }
-  if(x==9 || x==219 || x==222){//tab or openbracket or singleQuote
+  if(x==9){//tab
     event.preventDefault();
-    let str = document.getElementById('myOl').children[row_num].textContent;
-    let textToAdd;
-    if(x==9){textToAdd = '   ';}//tab
-    else if(x==219){textToAdd = '{}';}//brackets
-    else if(x==222){textToAdd = "''";}//singleQuote
-    let strFirstPart = str.substring(0,caretPos);
-    let strSecondPart = str.substring(caretPos,str.length);
-    str = strFirstPart+textToAdd+strSecondPart;
-    document.getElementById('myOl').children[row_num].innerHTML = str;
-    moveCaret();
+  }
+  if(x==39){//right
+    if(caretPos==document.getElementById('myOl').children[row_num].textContent.length && document.getElementById("myOl").childElementCount!=row_num+1){
+      row_num++;
+    }
   }
   if(x==37){//left
-    previous_caretPos = caretPos;
+    if(caretPos ==0  && row_num!=0){ //previous one is 0 than surely cursor is on new
+      row_num--;
+    }
   }
 }
 let previous_caretPos=0;

@@ -1,0 +1,39 @@
+myOl_keydown.js tab and other functions:
+
+if(x==219 || x==222 || x==57 || x==188){
+  if(!!event.shiftKey){ //convert shift key to bool and check if true
+    let textToAdd;
+    switch(x){
+      case 16:
+      break;
+      default:
+        if(x==219){textToAdd = '{}';}
+        else if(x==222){textToAdd = '""';}
+        else if(x==57){textToAdd = '()';}
+        else if(x==188){textToAdd = '<>';}
+        break;
+      }
+      let range = window.getSelection().getRangeAt(0);
+      range.deleteContents();
+      range.insertNode(document.createTextNode(textToAdd));
+      //moveCaret();
+      console.log(document.getElementById('myOl').children[0]);
+    }
+  }
+let range = window.getSelection().getRangeAt(0);
+  range.deleteContents();
+  range.insertNode(document.createTextNode(textToAdd));
+  moveCaret();
+
+if(x==9 || x==222){//tab or singleQuote
+  event.preventDefault();
+  let str = document.getElementById('myOl').children[row_num].textContent;
+  let textToAdd;
+  if(x==9){textToAdd = '   ';}//tab
+  else if(x==222){textToAdd = "''";}//singleQuote
+  let strFirstPart = str.substring(0,caretPos);
+  let strSecondPart = str.substring(caretPos,str.length);
+  str = strFirstPart+textToAdd+strSecondPart;
+  document.getElementById('myOl').children[row_num].innerHTML = str;
+  moveCaret();
+}

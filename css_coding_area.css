@@ -20,31 +20,7 @@
     color : white;
   }
 
-
-  /*#myOl{
-    counter-reset: libeforecount;
-    list-style-type: none;
-  }
-  #listing>ol>li::before {
-    counter-increment: libeforecount;
-    content: counter(libeforecount) "\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0";
-  }
-  #listing>ol>li:nth-child(-n+99999){
-    padding-left: 0vw;
-  }
-  #listing>ol>li:nth-child(-n+9999){
-    padding-left: 1vw;
-  }
-  #listing>ol>li:nth-child(-n+999){
-    padding-left: 2vw;
-  }
-  #listing>ol>li:nth-child(-n+99){
-    padding-left: 3vw;
-  }
-  #listing>ol>li:nth-child(-n+9){
-    padding-left: 4vw;
-  }*/
-  li::selection {
+  ::selection {
     color: gold;
     background: red;
   }

@@ -142,8 +142,8 @@ iframe{
   padding: 10px;
   border: 0px;
   border-radius: 5px;
-  background-color: black;
-  color: white;
+  background-color: rgba(255,255,255,0.3);
+  color: black;
 }
 #find_divEl button{
   padding: 10px;
@@ -166,8 +166,8 @@ iframe{
   padding: 10px;
   border: 0px;
   border-radius: 5px;
-  background-color: black;
-  color: white;
+  background-color: rgba(255,255,255,0.3);
+  color: black;
 }
 #replace_divEl button{
   padding: 10px;
