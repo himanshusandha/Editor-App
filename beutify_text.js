@@ -41,6 +41,7 @@ function moveCaret() {
     }
     split_length++;
   }
+  split_length = split_length + (document.getElementById('myOl').children[row_num].textContent.match(/</g) || []).length; //bug of <
   range.setStart(node, split_length+1);
   range.setEnd(node, split_length+1);
   var selection = window.getSelection();
@@ -49,7 +50,9 @@ function moveCaret() {
 }
 
 function applyRegEx(str){
-  let regex = new RegExp(' ','g');
+  let regex = new RegExp('<','g'); //bug of <
+  str=str.replace(regex,"<span>"+'<'+"</span>");
+  regex = new RegExp(' ','g');
   str=str.replace(regex,"<span>"+' '+"</span>");
 
   regex = new RegExp('public','g');

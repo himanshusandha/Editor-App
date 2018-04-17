@@ -6,6 +6,10 @@ function showData(getText) {
     document.getElementById("myOl").appendChild(y);
     row_num++;
   }
+  for (i = 0; i < document.getElementById('myOl').children.length; i++) {
+    row_num = i;
+    beutify_string();
+  }
 }
 let filename;
 function getData(fname) {
