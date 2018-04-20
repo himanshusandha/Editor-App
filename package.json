@@ -1,5 +1,5 @@
 {
-  "name": "editorapp",
+  "name": "SparkEditorApp",
   "version": "1.0.0",
   "description": "A Cross Platform Editor App",
   "main": "index.js",

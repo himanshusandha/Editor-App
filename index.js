@@ -7,6 +7,7 @@ const{app,BrowserWindow,Menu,ipcMain,dialog}=electron;
 
 let mainWindow;
 let googleSearch;
+let userManual;
 
 app.on('ready',function(){
 	mainWindow=new BrowserWindow({show: false,});
@@ -120,10 +121,6 @@ const mainMenuTemplate=[
 			{role: 'delete'},
 			{role: 'selectall'},
 			{type: 'separator'},
-			{label: 'bold',accelerator: 'CmdOrCtrl+B'},
-			{label: 'underline',accelerator: 'CmdOrCtrl+U'},
-			{label: 'italic',accelerator: 'CmdOrCtrl+I'},
-			{type: 'separator'},
 			{
 				label : 'Wrap Content',
 				submenu : [
@@ -163,7 +160,7 @@ const mainMenuTemplate=[
 		submenu: [
 			{role: 'reload'},
 			{role: 'forcereload'},
-			{role: 'toggledevtools'},
+			//{role: 'toggledevtools'},
 			{type: 'separator'},
 			{role: 'resetzoom'},
 			{role: 'zoomin'},
@@ -257,6 +254,7 @@ const mainMenuTemplate=[
 			protocol:'https:',
 			slashes:true
 			}));
+			googleSearch.setMenu(null);
 		}
 	},
 	//8th menuitem
@@ -267,7 +265,20 @@ const mainMenuTemplate=[
 			label: 'Learn More',
 			accelerator : 'CmdOrCtrl+H',
 			click () {electron.shell.openExternal('www.himanshusandha.wordpress.com')}
-		  }
+			},
+			{
+				label: 'User Manual',
+				accelerator : 'CmdOrCtrl+shift+m',
+				click(){
+					userManual=new BrowserWindow({width: 800, height: 600}),
+					userManual.loadURL(url.format({
+					pathname:path.join(__dirname,'userManual.html'),
+					protocol:'file:',
+					slashes:true
+					}));
+					userManual.setMenu(null);
+				}
+			},
 		]
 	},
 	//9th

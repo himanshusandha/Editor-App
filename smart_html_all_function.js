@@ -117,7 +117,7 @@ function iDelete() {
  function getData(fname) {
    filename=fname;
 	 let saveText = window.frames['richTextField'].document.body.innerHTML;
-	 saveText = "<html><head><title></title></head><body>" + saveText + "</body></html>";
+	 saveText = "<html><head><title>" + document.getElementById('titleText').value +"</title></head><body>" + saveText + "</body></html>";
    return saveText;
  }
 
